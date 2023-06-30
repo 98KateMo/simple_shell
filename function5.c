@@ -9,8 +9,8 @@
  */
 void _eputs(char *str)
 {
-    if (str != NULL)
-        write(2, str, _strlen(str));
+if (str != NULL)
+write(2, str, _strlen(str));
 }
 
 /**
@@ -22,7 +22,7 @@ void _eputs(char *str)
  */
 int _eputchar(char c)
 {
-    return write(2, &c, 1);
+return (write(2, &c, 1));
 }
 
 /**
@@ -35,7 +35,7 @@ int _eputchar(char c)
  */
 int _put_fdesc(char c, int fd)
 {
-    return write(fd, &c, 1);
+return (write(fd, &c, 1));
 }
 
 /**
@@ -47,8 +47,8 @@ int _put_fdesc(char c, int fd)
  */
 int _puts_fdesc(char *str, int fd)
 {
-    if (str != NULL)
-        return write(fd, str, _strlen(str));
-    return 0;
+if (str != NULL)
+return (write(fd, str, _strlen(str)));
+return (0);
 }
 

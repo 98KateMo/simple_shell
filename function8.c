@@ -60,35 +60,35 @@ int _unsetenv(info_t *info, char *var)
  */
 int _setenv(info_t *info, char *var, char *value)
 {
-    char *buf = NULL;
-    list_t *node;
-    char *p;
+char *buf = NULL;
+list_t *node;
+char *p;
 
-    if (!var || !value)
-        return (0);
+if (!var || !value)
+return (0);
 
-    buf = malloc(_strlen(var) + _strlen(value) + 2);
-    if (!buf)
-        return (1);
-    _strcpy(buf, var);
-    _strcat(buf, "=");
-    _strcat(buf, value);
-    node = info->env;
-    while (node)
-    {
-        p = _strchr(node->str, '=');
-        if (p && _strcmp(p + 1, var) == 0)
-        {
-            free(node->str);
-            node->str = buf;
-            info->env_changed = 1;
-            return (0);
-        }
-        node = node->next;
-    }
-    add_node_end(&(info->env), buf, 0);
-    free(buf);
-    info->env_changed = 1;
-    return (0);
+buf = malloc(_strlen(var) + _strlen(value) + 2);
+if (!buf)
+return (1);
+ _strcpy(buf, var);
+ _strcat(buf, "=");
+ _strcat(buf, value);
+ node = info->env;
+ while (node)
+ {
+ p = _strchr(node->str, '=');
+ if (p && _strcmp(p + 1, var) == 0)
+ {
+ free(node->str);
+ node->str = buf;
+ info->env_changed = 1;
+ return (0);
+ }
+ node = node->next;
+ }
+ add_node_end(&(info->env), buf, 0);
+ free(buf);
+ info->env_changed = 1;
+ return (0);
 }
 
