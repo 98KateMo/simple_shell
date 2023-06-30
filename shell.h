@@ -23,7 +23,7 @@
 #define GETLINE_FUNC 0
 #define HIST_NAME	".simple_shell_history"
 #define MAX_BYTES_HIST	4096
-extern char **env_var;
+extern char **environ;
 /**
  * struct str_list - singly linked list
  * @num: the number field
@@ -165,7 +165,7 @@ size_t print_list(const list_t *);
 list_t *node_prefix(list_t *, char *, char);
 ssize_t get_index(list_t *, list_t *);
 int chain(info_t *, char *, size_t *);
-void find_chain(info_t *, char *, size_t *, size_t, size_t)
+void find_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
 int new_alias(info_t *);
 int new_vars(info_t *);
 int new_string(char **, char *);
