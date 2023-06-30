@@ -19,6 +19,8 @@ void reset_info(info_t *info)
  */
 void add_info(info_t *info, char **av)
 {
+    int i = 0;
+
     info->fname = av[0];
     if (info->arg)
     {
@@ -32,7 +34,9 @@ void add_info(info_t *info, char **av)
                 info->argv[1] = NULL;
             }
         }
-        info->argc = _str_array_len(info->argv);
+        for (i = 0; info->argv && info->argv[i]; i++)
+            ;
+        info->argc = i;
 
         new_alias(info);
         new_vars(info);
@@ -52,10 +56,13 @@ void free_buff(info_t *info, int all)
     if (all)
     {
         if (!info->cmd_buf)
-            _free(info->arg);
-        free_list(&(info->env));
-        free_list(&(info->history));
-        free_list(&(info->alias));
+            free(info->arg);
+        if (info->env)
+            free_list(&(info->env));
+        if (info->history)
+            free_list(&(info->history));
+        if (info->alias)
+            free_list(&(info->alias));
         _free(info->env_var);
         info->env_var = NULL;
         _free2((void **)info->cmd_buf);
@@ -64,3 +71,4 @@ void free_buff(info_t *info, int all)
         _putchar(FLUSH);
     }
 }
+

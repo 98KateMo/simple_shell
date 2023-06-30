@@ -1,12 +1,14 @@
 #include "shell.h"
+#include <unistd.h>
+#include <limits.h>
 
 /**
  * err_no - converts a string to an integer
  * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
- *         -1 on error
+ *       -1 on error
  */
-int err_no(const char *s)
+int err_no(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
@@ -32,9 +34,9 @@ int err_no(const char *s)
  * _perror - prints an error message
  * @info: the parameter & return info struct
  * @estr: string containing specified error type
- * Return: Nothing
+ * Return: void
  */
-void _perror(const info_t *info, const char *estr)
+void _perror(info_t *info, char *estr)
 {
 	_eputs(info->fname);
 	_eputs(": ");
@@ -54,33 +56,31 @@ void _perror(const info_t *info, const char *estr)
  */
 int _dprint(int input, int fd)
 {
-	int (*putchar_func)(char) = (fd == STDERR_FILENO) ? _eputchar : _putchar;
+	int (*__putchar)(char) = _putchar;
 	int i, count = 0;
-	unsigned int abs_val, current;
+	unsigned int _abs_, current;
 
+	if (fd == STDERR_FILENO)
+		__putchar = _eputchar;
 	if (input < 0)
 	{
-		abs_val = (unsigned int)(-input);
-		putchar_func('-');
+		_abs_ = -input;
+		__putchar('-');
 		count++;
 	}
 	else
-	{
-		abs_val = (unsigned int)input;
-	}
-	current = abs_val;
-
+		_abs_ = input;
+	current = _abs_;
 	for (i = 1000000000; i > 1; i /= 10)
 	{
-		if (abs_val / i)
+		if (_abs_ / i)
 		{
-			putchar_func('0' + current / i);
+			__putchar('0' + current / i);
 			count++;
 		}
 		current %= i;
 	}
-
-	putchar_func('0' + current);
+	__putchar('0' + current);
 	count++;
 
 	return (count);
@@ -96,27 +96,28 @@ int _dprint(int input, int fd)
  */
 char *conv_int(long int num, int base, int flags)
 {
+	static char *array;
 	static char buffer[50];
 	char sign = 0;
 	char *ptr;
-	unsigned long n = (unsigned long)((num < 0 && !(flags & TO_UNSIGNED)) ? -num : num);
-	const char *array = (flags & TO_LOWER) ? "0123456789abcdef" : "0123456789ABCDEF";
+	unsigned long n = num;
 
-	if (num < 0 && !(flags & TO_UNSIGNED))
+	if (!(flags & TO_UNSIGNED) && num < 0)
+	{
+		n = -num;
 		sign = '-';
-
+	}
+	array = flags & TO_LOWER ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
 
-	do
-	{
+	do {
 		*--ptr = array[n % base];
 		n /= base;
 	} while (n != 0);
 
 	if (sign)
 		*--ptr = sign;
-
 	return (ptr);
 }
 
@@ -124,7 +125,7 @@ char *conv_int(long int num, int base, int flags)
  * rm_comm - function replaces first instance of '#' with '\0'
  * @buf: address of the string to modify
  *
- * Return: Nothing
+ * Return: void
  */
 void rm_comm(char *buf)
 {
@@ -139,3 +140,4 @@ void rm_comm(char *buf)
 		}
 	}
 }
+
