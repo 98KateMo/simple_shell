@@ -1,19 +1,20 @@
 #include "shell.h"
+#include <unistd.h>
 
 /**
- * _eputs - prints a string to stderr
+ * _eputs - prints an input string to stderr
  * @str: the string to be printed
  *
  * Return: Nothing
  */
-void _eputs(const char *str)
+void _eputs(char *str)
 {
-	if (str != NULL)
-		write(2, str, _strlen(str));
+    if (str != NULL)
+        write(2, str, _strlen(str));
 }
 
 /**
- * _eputchar - writes a character to stderr
+ * _eputchar - writes the character c to stderr
  * @c: The character to print
  *
  * Return: On success 1.
@@ -21,11 +22,11 @@ void _eputs(const char *str)
  */
 int _eputchar(char c)
 {
-	return (write(2, &c, 1));
+    return write(2, &c, 1);
 }
 
 /**
- * _put_fdesc - writes a character to a given file descriptor
+ * _put_fdesc - writes the character c to given fd
  * @c: The character to print
  * @fd: The file descriptor to write to
  *
@@ -34,19 +35,20 @@ int _eputchar(char c)
  */
 int _put_fdesc(char c, int fd)
 {
-	return (write(fd, &c, 1));
+    return write(fd, &c, 1);
 }
 
 /**
- * _puts_fdesc - prints a string to a given file descriptor
+ * _puts_fdesc - prints an input string
  * @str: the string to be printed
  * @fd: the file descriptor to write to
  *
- * Return: the number of characters written
+ * Return: the number of characters put
  */
-int _puts_fdesc(const char *str, int fd)
+int _puts_fdesc(char *str, int fd)
 {
-	if (str != NULL)
-		return (write(fd, str, _strlen(str)));
-	return (0);
+    if (str != NULL)
+        return write(fd, str, _strlen(str));
+    return 0;
 }
+
