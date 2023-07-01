@@ -9,8 +9,8 @@ int shell(info_t *info, char **av)
     {
         reset_info(info);
         if (for_active(info))
-            _puts("$ ");
-        _eputchar(FLUSH);
+		write(STDOUT_FILENO, "$ ", 2);
+        /*_eputchar(FLUSH)*/
         r = read_input(info);
         if (r != -1)
         {
