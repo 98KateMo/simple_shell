@@ -1,12 +1,5 @@
 #include "shell.h"
 
-/**
- * b_exit - exits the shell
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- *
- * Return: exits with a given exit status (0) if info->argv[0] != "exit"
- */
 int b_exit(info_t *info)
 {
 	int exitcheck;
@@ -30,13 +23,6 @@ int b_exit(info_t *info)
 	return (-2);
 }
 
-/**
- * b_cd - changes the current directory of the process
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- *
- * Return: Always 0
- */
 int b_cd(info_t *info)
 {
 	char *s, *dir, buffer[1024];
@@ -84,13 +70,6 @@ int b_cd(info_t *info)
 	return (0);
 }
 
-/**
- * b_help - displays help information
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- *
- * Return: Always 0
- */
 int b_help(info_t *info)
 {
 	char **arg_array = info->argv;

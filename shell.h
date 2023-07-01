@@ -37,28 +37,6 @@ typedef struct str_list
 	struct str_list *next;
 } list_t;
 
-/**
- *struct send_info - contains pseudo-arguements to pass into a function,
- *		allowing uniform prototype for function pointer struct
- *@arg: a string generated from getline containing arguements
- *@argv: an array of strings generated from arg
- *@path: a string path for the current command
- *@argc: the argument count
- *@line_count: the error count
- *@err_num: the error code for exit()s
- *@linecount_flag: if on count this line of input
- *@fname: the program filename
- *@env: linked list local copy of env_var
- *@env_var: custom modified copy of env_var from LL env
- *@history: the history node
- *@alias: the alias node
- *@env_changed: on if env_var was changed
- *@status: the return status of the last exec'd command
- *@cmd_buf: address of pointer to cmd_buf, on if chaining
- *@cmd_buf_type: CMD_type ||, &&, ;
- *@readfd: the fd from which to read line input
- *@histcount: the history line number count
- */
 typedef struct send_info
 {
 	char *arg;
@@ -83,11 +61,7 @@ typedef struct send_info
 #define INFO_VARS \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	0, 0, 0}
-/**
- *struct builtin - contains a builtin string and related function
- *@type: the builtin command flag
- *@func: the function
- */
+
 typedef struct builtin
 {
 	char *type;

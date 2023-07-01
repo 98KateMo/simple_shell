@@ -1,11 +1,5 @@
 #include "shell.h"
 #include <stdlib.h>
-
-/**
- * b_env - prints the current environment
- * @info: Structure containing potential arguments.
- * Return: Always 0
- */
 int b_env(info_t *info)
 {
     list_t *node = info->env;
@@ -21,13 +15,7 @@ int b_env(info_t *info)
     return (0);
 }
 
-/**
- * _getenv - gets the value of an environment variable
- * @info: Structure containing potential arguments.
- * @name: env var name
- *
- * Return: the value
- */
+
 char *_getenv(info_t *info, const char *name)
 {
     list_t *node = info->env;
@@ -44,12 +32,6 @@ char *_getenv(info_t *info, const char *name)
     return (NULL);
 }
 
-/**
- * b_setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments.
- * Return: Always 0
- */
 int b_setenv(info_t *info)
 {
     if (info->argc != 3)
@@ -69,11 +51,7 @@ int b_setenv(info_t *info)
     return (0);
 }
 
-/**
- * b_unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments.
- * Return: Always 0
- */
+
 int b_unsetenv(info_t *info)
 {
     int i;
@@ -93,11 +71,6 @@ int b_unsetenv(info_t *info)
     return (0);
 }
 
-/**
- * add_env_vars - populates env linked list
- * @info: Structure containing potential arguments.
- * Return: Always 0
- */
 int add_env_vars(info_t *info)
 {
     list_t *node = NULL;

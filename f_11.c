@@ -1,11 +1,5 @@
 #include "shell.h"
 
-/**
- * find_file - gets the history file
- * @info: parameter struct
- *
- * Return: allocated string containg history file
- */
 char *find_file(info_t *info)
 {
     char *buf, *dir;
@@ -23,12 +17,6 @@ char *find_file(info_t *info)
     return (buf);
 }
 
-/**
- * write_file - creates a file, or appends to an existing file
- * @info: the parameter struct
- *
- * Return: 1 on success, else -1
- */
 int write_file(info_t *info)
 {
     int fd;
@@ -52,12 +40,6 @@ int write_file(info_t *info)
     return (1);
 }
 
-/**
- * read_file - reads history from file
- * @info: the parameter struct
- *
- * Return: histcount on success, 0 otherwise
- */
 int read_file(info_t *info)
 {
     int i, last = 0, linecount = 0;
@@ -103,14 +85,6 @@ int read_file(info_t *info)
     return (info->histcount);
 }
 
-/**
- * create_hist - adds entry to a history linked list
- * @info: Structure containing potential arguments. Used to maintain
- * @buf: buffer
- * @linecount: the history linecount, histcount
- *
- * Return: Always 0
- */
 int create_hist(info_t *info, char *buf, int linecount)
 {
     list_t *node = NULL;
@@ -124,12 +98,7 @@ int create_hist(info_t *info, char *buf, int linecount)
     return (0);
 }
 
-/**
- * renumber_file - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- *
- * Return: the new histcount
- */
+
 int renumber_file(info_t *info)
 {
     list_t *node = info->history;

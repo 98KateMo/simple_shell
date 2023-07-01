@@ -1,11 +1,6 @@
 #include "shell.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-/**
- * reset_info - initializes info_t struct
- * @info: struct address
- */
 void reset_info(info_t *info)
 {
     info->arg = NULL;
@@ -14,11 +9,6 @@ void reset_info(info_t *info)
     info->argc = 0;
 }
 
-/**
- * add_info - initializes info_t struct
- * @info: struct address
- * @av: argument vector
- */
 void add_info(info_t *info, char **av)
 {
     int i = 0;
@@ -45,11 +35,6 @@ void add_info(info_t *info, char **av)
     }
 }
 
-/**
- * free_buff - frees info_t struct fields
- * @info: struct address
- * @all: true if freeing all fields
- */
 void free_buff(info_t *info, int all)
 {
     _free(info->argv);
